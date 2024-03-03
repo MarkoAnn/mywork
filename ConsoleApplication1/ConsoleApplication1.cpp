@@ -1,8 +1,12 @@
-﻿
-
+﻿#include <cstdio>
 #include <iostream>
+#include <conio.h>
+
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	cout << "Hello world !!!";
+	_getch();
+	return 0;
 }
