@@ -13,27 +13,29 @@ using namespace std;
     return true;
 }*/
 
-int main()
-{
+bool userWantsToContinue() {
+    int s;
+    cout << "1 - Продолжить\n2 - Выход\nВыберите: ";
+    cin >> s;
+    return (s == 1);
+}
+
+int main() {
     setlocale(LC_ALL, "ru");
     cout << "Hello world !!!\n";
 
-    while (true)
-    {
+    while (true) {
+        if (!userWantsToContinue()) {
+            break;
+        }
+
         float a, b, c;
         char d;
-        int s;
 
-        cout << "1= продолжить \n 2 - выход \n";
-        cin >> s;
-
-        if (s != 1)
-            break;
-
-        cout << "First number: ";
+        cout << "Первое число: ";
         cin >> a;
         if (cin.fail()) {
-            cout << "Ошибка: Вы ввели неправильное число. " << endl;
+            cout << "Ошибка: Вы ввели неправильное число." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
@@ -53,7 +55,7 @@ int main()
             }
         } while (d != '/' && d != '*' && d != '+' && d != '-');
 
-        cout << "Second number: ";
+        cout << "Второе число: ";
         cin >> b;
         if (cin.fail()) {
             cout << "Ошибка: Неверный формат числа." << endl;
@@ -80,7 +82,7 @@ int main()
             c = a / b;
             break;
         }
-        cout << "Result = " << c << endl;
+        cout << "Результат = " << c << endl;
     }
     return 0;
 }
