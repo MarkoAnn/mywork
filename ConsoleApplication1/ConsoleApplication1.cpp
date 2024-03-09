@@ -1,86 +1,68 @@
-﻿#include <iostream>
-#include <cctype>
+﻿#include <iostream> 
+
+float a = 5, b = 5, c;
+char d;
 
 using namespace std;
 
+bool userWantsToContinue() {
+    char choice;
+    cout << "1 - Продолжить\n2 - Выход\nВыберите: ";
+    cin >> choice;
+    return (choice == '1');
+}
 
-/*bool isNumber(const string& str) {
-    for (char c : str) {
-        if (!isdigit(c) && c != '.') {
-            return false;
+float makeSomeCalculations(float a, char d, float b) {
+    float result = 0;
+    switch (d) {
+    case '+':
+        result = a + b;
+        break;
+    case '-':
+        result = a - b;
+        break;
+    case '*':
+        result = a * b;
+        break;
+    case '/':
+        if (b != 0) {
+            result = a / b;
         }
+        else {
+            cout << "Ошибка: деление на ноль!" << endl;
+        }
+        break;
+    default:
+        cout << "Ошибка: неверная операция!" << endl;
+        break;
     }
-    return true;
-}*/
+    return result;
+}
+void printResult() {
+    cout << "Полученный результат: " << c << endl;
+}
 
-int main()
-{
+
+void readExpression() {
+    while (true) {
+        if (!userWantsToContinue()) {
+            break;
+        }
+        cout << "Введите выражение (например, 5 + 3): ";
+        cin >> a >> d >> b;
+        cout << "Считанное выражение: " << a << " " << d << " " << b << endl;
+        c = makeSomeCalculations(a, d, b);
+        printResult();
+    }
+}
+
+
+
+
+
+int main() {
     setlocale(LC_ALL, "ru");
     cout << "Hello world !!!\n";
-
-    while (true)
-    {
-        float a, b, c;
-        char d;
-        int s;
-
-        cout << "1= продолжить \n 2 - выход \n";
-        cin >> s;
-
-        if (s != 1)
-            break;
-
-        cout << "First number: ";
-        cin >> a;
-        if (cin.fail()) {
-            cout << "Ошибка: Вы ввели неправильное число. " << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
-        }
-
-        do {
-            cout << "Выберите действие: ";
-            cin >> d;
-            switch (d) {
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-                break;
-            default:
-                cout << "Произошла ошибка. Убедитесь в том, что вы используете только * / + - \n";
-            }
-        } while (d != '/' && d != '*' && d != '+' && d != '-');
-
-        cout << "Second number: ";
-        cin >> b;
-        if (cin.fail()) {
-            cout << "Ошибка: Неверный формат числа." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
-        }
-
-        switch (d) {
-        case '+':
-            c = a + b;
-            break;
-        case '-':
-            c = a - b;
-            break;
-        case '*':
-            c = a * b;
-            break;
-        case '/':
-            if (b == 0) {
-                cout << "Ошибка: Деление на ноль." << endl;
-                continue;
-            }
-            c = a / b;
-            break;
-        }
-        cout << "Result = " << c << endl;
-    }
+    readExpression();
     return 0;
 }
