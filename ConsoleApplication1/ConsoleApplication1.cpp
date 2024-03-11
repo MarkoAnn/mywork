@@ -65,7 +65,7 @@ void endCalculations() {
 
 int main() {
 	setlocale(LC_ALL, "ru");
-	cout << "Hello world !!!\n";
+	cout << "Hello world !!!!\n";
 	endCalculations();
 	return 0;
 }
