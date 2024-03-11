@@ -52,10 +52,7 @@ void performCalculations(float a, char d, float b) {
 }
 
 void endCalculations() {
-	while (true) {
-		if (!userWantsToContinue()) {
-			break;
-		}
+	while (userWantsToContinue()){
 		float a, b;
 		char d;
 		getUserExpression(a, d, b);
