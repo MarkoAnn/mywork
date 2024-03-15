@@ -1,4 +1,4 @@
-﻿﻿#include <iostream>
+﻿#include <iostream>
 using namespace std;
 
 struct Expression {
@@ -16,31 +16,25 @@ bool userWantsToContinue() {
 }
 
 float makeSomeCalculations(const Expression& expr) {
-    float result = 0;
     switch (expr.d) {
     case '+':
-        result = expr.a + expr.b;
-        break;
+        return expr.a + expr.b;
     case '-':
-        result = expr.a - expr.b;
-        break;
+        return expr.a - expr.b;
     case '*':
-        result = expr.a * expr.b;
-        break;
+        return expr.a * expr.b;
     case '/':
         if (expr.b != 0) {
-            result = expr.a / expr.b;
+            return expr.a / expr.b;
         }
         else {
-            cout << "Ошибка: деление на ноль!" << endl;
+            throw runtime_error("деление на ноль");
         }
-        break;
     default:
-        cout << "Ошибка: неверная операция!" << endl;
-        break;
+        throw runtime_error("неверная операция");
     }
-    return result;
 }
+
 
 void printResult(float result) {
     cout << "Полученный результат: " << result << endl;
@@ -63,8 +57,13 @@ void performCalculations(const Expression& expr) {
 
 void endCalculations() {
     while (userWantsToContinue()) {
-        Expression expr = getUserExpression();
-        performCalculations(expr);
+        try {
+            Expression expr = getUserExpression();
+            performCalculations(expr);
+        }
+        catch (const exception& e) {
+            cout << "Ошибка: " << e.what() << endl;
+        }
     }
 }
 
